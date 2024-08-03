@@ -9,17 +9,15 @@ const useHeavyComputation = () => {
   const computeDetails = useMemo(() => {
     return (item: Item) => {
       let details = '';
-      const startTime = performance.now();
       if (item) {
+        const startTime = performance.now();
         for (let i = 0; i < 10000; i++) {
           details += item.title;
         }
+        const endTime = performance.now();
+        const ms = endTime - startTime;
+        console.log(`Heavy computation took: ${ms.toFixed(4)} milliseconds`);
       }
-
-      const endTime = performance.now();
-      const ms = endTime - startTime;
-
-      console.log(`Heavy computation took: ${ms.toFixed(4)} milliseconds`);
       return details;
     };
   }, []);
